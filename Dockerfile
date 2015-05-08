@@ -1,6 +1,10 @@
 FROM resin/rpi-raspbian:latest
-RUN apt-get update -y && apt-get install -y \
-python python-pip python-dev python-dbus python-flask \
-&& apt-get clean && rm -rf /var/lib/apt/lists/*
-COPY . /app
-CMD ["python", "/app/server.py"]
+RUN apt-get update \
+	&& apt-get install -y \
+	python \
+	python-dev \
+	python-dbus \
+	python-flask \
+	&& rm -rf /var/lib/apt/lists/*
+COPY server.py /usr/src/app/
+CMD ["python", "/usr/src/app/server.py"]
